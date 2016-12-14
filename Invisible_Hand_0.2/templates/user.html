@@ -1,0 +1,207 @@
+
+<div class="container">
+	<h3>You are logged in as: {{currentUser.display_name}}</h3>
+
+
+	<a href="#/"><button class="btn btn-lg btn-warning smallbutton">
+					Back to List of Markets
+	</button></a>
+
+
+	<div class="col-sm-12 listingbox">
+		<h2>Listing</h2>
+		<div class="row">
+			<div class="col-xs-1 marketitem">
+				<h4></h4>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				<h4>Commodity</h4>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h4>Side</h4>
+			</div>	
+			
+			<div class="col-xs-1 marketitem">
+				<h4>Price</h4>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h4>Qty</h4>
+			</div>
+			<div class="col-xs-6 marketitem hidden-xs">
+				<h4>Description</h4>
+			</div>
+		</div>
+		<div class="row" ng-repeat="bid in listings | orderBy: sorterFunc: true">
+			<div class="col-sm-1 col-xs-2 marketitem">
+				<a class="btn smallbutton btn-sm btn-danger" ng-click="removeListing(bid.listing_id, bid.side, bid.commodity_id, bid.$id)"><i class="fa fa-times" aria-hidden="true"></i>
+				</a>
+			</div>
+			<div class="col-sm-2 col-xs-4 marketitem">
+				{{bid.commodity}}
+			</div>
+			<div class="col-sm-1 col-xs-2 marketitem">
+				{{bid.side}}
+			</div>
+			<div class="col-sm-1 col-xs-2 marketitem">
+				${{bid.price}}/lb
+			</div>	
+			<div class="col-sm-1 col-xs-2 marketitem">
+				{{bid.size}}lbs
+			</div>	
+			<div class="col-sm-6 marketitem col-xs-12">
+				{{bid.description}}
+			</div>	
+		</div>
+	</div>
+	
+	
+
+	<div class="col-sm-12 listingbox">
+		<h2>Messages</h2>
+		<div class="row">
+			<div class="col-xs-1 marketitem">
+				<h4></h4>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				<h4>Commodity</h4>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h4>Side</h4>
+			</div>	
+			
+			<div class="col-xs-1 marketitem">
+				<h4>Price</h4>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h4>Qty</h4>
+			</div>
+			<div class="col-xs-5 marketitem">
+				<h4>Description</h4>
+			</div>		
+		</div> 
+	
+		<div class="row" ng-repeat="message in messages | orderBy: sorterFunc: true">
+			<div class="col-xs-1 marketitem" ng-show="message.type=='incoming'">
+				<a class="btn smallbutton btn-sm btn-success" href="mailto:{{message.email}}"><i class="fa fa-envelope" aria-hidden="true"></i>
+</a>
+			</div>	
+			<div class="col-xs-1 marketitem" ng-show="message.type=='outgoing'">
+				<a class="btn smallbutton btn-sm btn-warning" ng-click="writeReview(message.userid, message.$id)"><i class="fa fa-commenting" aria-hidden="true"></i>
+</a>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				{{message.commodity}}
+			</div>
+			<div class="col-xs-1 marketitem">
+				{{message.side}}
+			</div>
+			
+			<div class="col-xs-1 marketitem">
+				${{message.price}}/lb
+			</div>	
+			<div class="col-xs-1 marketitem">
+				{{message.size}}lbs
+			</div>	
+			<div class="col-xs-5 marketitem">
+				{{message.description}}
+			</div>	
+
+		</div> 
+	</div>
+
+
+
+	<div class="col-sm-12 listingbox">
+		<h2>Reviews</h2>
+		<div class="row">
+			<div class="col-xs-2 marketitem">
+				<h5>Commodity</h5>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h5>Side</h5>
+			</div>	
+			<div class="col-xs-1 marketitem">
+				<h5>Price/lb</h5>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				<h5>Quantity in lbs</h5>
+			</div>
+			<div class="col-xs-2 marketitem">
+				<h5>Communication</h5>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				<h5>Honored Listing</h5>
+			</div>	
+			<div class="col-xs-2 marketitem">
+				<h5>Product as described</h5>
+			</div>				
+		</div> 
+		<div class="row" ng-repeat="review in currentUser.reviews | orderBy: sorterFunc: true">
+			<div class="col-xs-2 marketitem">
+				{{review.commodity}}
+			</div>
+			<div class="col-xs-1 marketitem">
+				{{review.side}}
+			</div>
+			<div class="col-xs-1 marketitem">
+				{{review.price}}
+			</div>	
+			<div class="col-xs-2 marketitem">
+				{{review.size}}
+			</div>	
+			<div class="col-xs-2 marketitem">
+				{{review.communication}}
+			</div>
+			<div class="col-xs-2 marketitem">
+				{{review.honored}}
+			</div>	
+			<div class="col-xs-2 marketitem">
+				{{review.product}}
+			</div>	
+		</div> 
+	
+	</div>
+
+	<div id="writeReviewModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Give a review</h4>
+	      </div>
+	      <div class="modal-body">	
+	      	<label>Communication</label>
+	      	<select class="form-control" ng-model="myReview.communication">
+	      		<option value="1">1</option>
+	      		<option value="2">2</option>
+	      		<option value="3">3</option>
+	      		<option value="4">4</option>
+	      		<option value="5">5</option>
+	      	</select>
+	      	<label>Honored Listing?</label>
+	      	<select class="form-control" ng-model="myReview.honored">
+	      		<option value="1">1</option>
+	      		<option value="2">2</option>
+	      		<option value="3">3</option>
+	      		<option value="4">4</option>
+	      		<option value="5">5</option>
+	      	</select>
+	      	<label>Product Represented Honestly?</label>
+	      	<select class="form-control" class="form-control" ng-model="myReview.product">
+	      		<option value="1">1</option>
+	      		<option value="2">2</option>
+	      		<option value="3">3</option>
+	      		<option value="4">4</option>
+	      		<option value="5">5</option>
+	      	</select>
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-lg btn-block btn-success" data-dismiss="modal" ng-click="submitReview()">
+				Submit Rating!
+			</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</div>
+	

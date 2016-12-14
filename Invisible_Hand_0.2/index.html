@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body ng-app="livecode">
+
+		<div ng-view>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+		<!-- Firebase -->
+		<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+
+		<!-- AngularFire -->
+		<script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+
+		<script>
+		  // Initialize the Firebase SDK
+				   var config = {
+		    apiKey: "AIzaSyBTfAGIF2HdJTtOYLrzqIzWpcCRgrxMY3w",
+		    authDomain: "invisible-hand-1fa5f.firebaseapp.com",
+		    databaseURL: "https://invisible-hand-1fa5f.firebaseio.com",
+		    storageBucket: "invisible-hand-1fa5f.appspot.com",
+		    messagingSenderId: "98048463267"
+		  };
+		  firebase.initializeApp(config);
+		</script>
+
+		<script src="app.js"></script>
+
+		<script src="controllers/main.js"></script>
+		<script src="controllers/marketcontroller.js"></script>
+		<script src="controllers/login.js"></script>
+		<script src="controllers/user.js"></script>
+
+		<script src="services/auth.js"></script>
+		<script src="services/market.js"></script>
+		<script src="https://use.fontawesome.com/f618e64766.js"></script>
+	</body>	
+</html>

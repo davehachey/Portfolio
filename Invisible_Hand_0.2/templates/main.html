@@ -1,0 +1,21 @@
+
+<div class="container">	
+	<h3>Hey {{currentUser.display_name}}</h3>
+	<button class="btn btn-lg btn-danger" ng-click="logout()">Logout</button>
+	<h1>Welcome to the The Invisible Hand!</h1>
+	<h2>A place to buy and sell goods.</h2>
+	<p></p>
+	<input type="text" class="form-control smallbutton" ng-model="newMarket.name" placeholder="Market">
+	<p></p>
+	<button class="btn btn-lg btn-success smallbutton" ng-click="addMarket()">
+		Add Market!
+	</button>
+	<a href="#/user"><button class="btn btn-lg btn-info smallbutton">View/Edit Listings/Messages</button></a>
+	<div class="listingbox">
+		<h2>Markets:</h2>
+		<h4 ng-repeat="market in marketList">
+		<strong>{{market.commodity}} :</strong> 
+		<a href="#/commodity/{{market.$id}}" class="btn btn-primary" ng-click="showUpdateMarket(market.$id)">View Detail or Place bid/offer</a>
+		</p>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<body ng-app="livecode">
+		<div ng-controller="MainController">
+		 	<h1>{{message}}</h1>
+
+		 	<button ng-click="respond()">Respond!</button>
+
+		 	<button ng-hide="showTypeName" ng-click="showTypeNameWindow()">Type your name</button>
+		 	<div ng-show="showTypeName">
+		 		<input type="text" ng-model="yourName">
+		 		<button ng-click="showName()">Alert Your Name!</button>
+		 	</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="app.js"></script>
+		<script src="controllers/main.js"></script>
+	</body>	
+</html>

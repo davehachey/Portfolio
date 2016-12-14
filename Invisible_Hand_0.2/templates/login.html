@@ -1,0 +1,33 @@
+<h1>Login to The Invisible Hand</h1>
+<h2>A place to buy and sell goods</h2>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12" ng-hide="isLoggedIn">
+			<div class="col-sm-4">
+				<button class="btn btn-lg btn-block btn-primary" ng-click="loginWithFacebook()">Sign in with Facebook</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p></p>
+<p></p>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12" ng-hide="isLoggedIn">
+			<div class="col-sm-4">
+				<button class="btn btn-lg btn-block btn-warning" ng-click="loginWithGoogle()">Sign in with Google
+			
+				</button>
+			</div>
+		</div>
+
+
+		<div class="col-sm-12" ng-show="isLoggedIn">
+			<h2>You're already logged in!</h2>
+			<button class="btn btn-lg btn-block btn-danger" ng-click="logout()">Logout</button>
+		</div>
+	</div>
+</div>

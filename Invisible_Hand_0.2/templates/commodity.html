@@ -1,0 +1,188 @@
+<div class="container">
+
+
+	<h1>Market for {{market.commodity}}</h1>
+
+	<h3>The Invisible Hand aspires to global domination.</h3>
+	<p>Don't be fooled by the humble beginnings</p>
+	<p>Place a bid or an offer. Markets are made one participant at a time.</p>
+
+		<button class="btn btn-lg btn-success smallbutton" ng-click="addListing()">
+						Add a listing
+		</button>
+
+		<a href="#/"><button class="btn btn-lg btn-warning smallbutton">
+						Back to List of Markets
+		</button></a>
+
+		<a href="#/user"><button class="btn btn-lg btn-info smallbutton">
+						View/Edit Listings/Messages
+		</button></a>
+
+		<button class="btn btn-lg btn-danger smallbutton" ng-click="logout()">Logout</button>
+
+		<div class="row">
+			
+				<div class="col-sm-6">
+					<div class="listingbox">
+						<p style="font-size:24px">Bids</p>
+						<div class="row">
+							
+							<div class="col-xs-4 marketitem">
+								<h5>Description</h5>
+							</div>	
+							<div class="col-xs-3 marketitem">
+								<h5>Price</h5>
+							</div>	
+							<div class="col-xs-3 marketitem">
+								<h5>Qty</h5>
+							</div>	
+							<div class="col-md-2">
+							</div>
+						
+						</div> 
+						<div class="row itembox" ng-repeat="bid in bids | orderBy: sorterFunc: true">
+							
+					
+							<div class="col-xs-4 marketitem">
+								{{bid.description}}
+							</div>	
+							<div class="col-xs-3 marketitem">
+								${{bid.price}}/lb
+							</div>	
+							<div class="col-xs-3 marketitem">
+								{{bid.size}}lbs
+							</div>
+							<div class="col-md-2" >
+								<button class="btn-sm btn btn-success btn-block btn-hitlift" ng-show="currentUser.$id != bid.userid" ng-click="showHitBid(bid.$id)">hit bid</button>
+								<p style="color:red" ng-show="currentUser.$id == bid.userid">MINE</p> 
+							</div>
+						
+						</div> 
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="listingbox">
+						<p style="font-size:24px">Offers</p>
+						<div class="row">
+							
+							<div class="col-xs-4 marketitem">
+								<h5>Description</h5>
+							</div>	
+							<div class="col-xs-3 marketitem">
+								<h5>Price</h5>
+							</div>	
+							<div class="col-xs-3 marketitem">
+								<h5>Qty</h5>
+							</div>	
+							<div class="col-md-2"> 
+							</div>
+						</div> 
+						<div class="row itembox" ng-repeat="offer in offers | orderBy: sorterFunc">
+							
+							<div class="col-xs-4 marketitem">
+							{{offer.description}}
+							</div>	
+							<div class="col-xs-3 marketitem">
+								${{offer.price | number}}/lb
+							</div>	
+							<div class="col-xs-3 marketitem">
+								{{offer.size}}lbs
+							</div>	
+							<div class="col-md-2">
+								<button class="btn-sm btn-danger btn-block btn btn-hitlift" ng-show="currentUser.$id != offer.userid" ng-click="showLiftOffer(offer.$id)">lift offer</button>
+								<p style="color:red" ng-show="currentUser.$id == offer.userid">MINE</p>
+							</div>
+						
+						</div> 
+					</div>
+				</div>
+		
+		</div>
+
+
+	<div id="addListingModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Add a listing</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<div class="form-group">  
+	        		<select class="form-control mb-10" ng-model="newListing.type">
+	        		<option value="">select buy or sell</option>
+	        		<option value="buy">buy</option>
+	        		<option value="sell">sell</option>
+	        		</select>
+	        	</div>
+			<input type="text" class="form-control mb-10" ng-model="newListing.price" placeholder="price per lb">
+			<input type="text" class="form-control mb-10" ng-model="newListing.size" placeholder="quantity in lbs">
+			<input type="text" class="form-control mb-10" ng-model="newListing.description" placeholder="description">
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-lg btn-block btn-success" data-dismiss="modal" ng-click="addNewListing(newListing)">
+				Add a Listing!
+			</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="hitBidModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Hit a bid</h4>
+	      </div>
+	      <div class="modal-body">	
+	      	<p>{{myOffer.description}}</p>
+	      	<label>Edit quantity?</label>
+			<input type="text" class="form-control mb-10" ng-model="myOffer.size" placeholder="edit quantity">
+			<label>Edit price?</label>
+			<input type="text" class="form-control mb-10" ng-model="myOffer.price" placeholder="edit price">
+			<input type="hidden" class="form-control mb-10" ng-model="myOffer.description" placeholder="description">
+			<input type="hidden" class="form-control mb-10" ng-model="myOffer.side" placeholder="description">
+			<input type="text" class="form-control mb-40" ng-model="myOffer.message" placeholder="send a message">		
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-lg btn-block btn-success" data-dismiss="modal" ng-click="hitBid()">
+				Send message!
+			</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="liftOfferModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Lift an Offer</h4>
+	      </div>
+	      <div class="modal-body">	
+	      	<p>{{myBid.description}}</p>
+	      	<label>Edit quantity?</label>
+			<input type="text" class="form-control mb-10" ng-model="myBid.size" placeholder="edit quantity">
+			<label>Edit price?</label>
+			<input type="text" class="form-control mb-10" ng-model="myBid.price" placeholder="edit price">
+			<input type="hidden" class="form-control mb-10" ng-model="myBid.description" placeholder="description">
+			<input type="hidden" class="form-control mb-10" ng-model="myBid.side" placeholder="description">
+			<input type="text" class="form-control mb-40" ng-model="myBid.message" placeholder="send a message">		
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-lg btn-block btn-success" data-dismiss="modal" ng-click="liftOffer()">
+				Send message!
+			</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+</div>
+
+
