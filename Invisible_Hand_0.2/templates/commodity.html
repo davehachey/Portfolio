@@ -6,101 +6,103 @@
 	<h3>The Invisible Hand aspires to global domination.</h3>
 	<p>Don't be fooled by the humble beginnings</p>
 	<p>Place a bid or an offer. Markets are made one participant at a time.</p>
-
-		<button class="btn btn-lg btn-success smallbutton" ng-click="addListing()">
-						Add a listing
-		</button>
-
-		<a href="#/"><button class="btn btn-lg btn-warning smallbutton">
-						Back to List of Markets
-		</button></a>
-
-		<a href="#/user"><button class="btn btn-lg btn-info smallbutton">
-						View/Edit Listings/Messages
-		</button></a>
-
-		<button class="btn btn-lg btn-danger smallbutton" ng-click="logout()">Logout</button>
-
-		<div class="row">
-			
+	<div class="row">
+		<div class ="col-sm-6">
+			<div class="row">
 				<div class="col-sm-6">
-					<div class="listingbox">
-						<p style="font-size:24px">Bids</p>
-						<div class="row">
-							
-							<div class="col-xs-4 marketitem">
-								<h5>Description</h5>
-							</div>	
-							<div class="col-xs-3 marketitem">
-								<h5>Price</h5>
-							</div>	
-							<div class="col-xs-3 marketitem">
-								<h5>Qty</h5>
-							</div>	
-							<div class="col-md-2">
-							</div>
-						
-						</div> 
-						<div class="row itembox" ng-repeat="bid in bids | orderBy: sorterFunc: true">
-							
-					
-							<div class="col-xs-4 marketitem">
-								{{bid.description}}
-							</div>	
-							<div class="col-xs-3 marketitem">
-								${{bid.price}}/lb
-							</div>	
-							<div class="col-xs-3 marketitem">
-								{{bid.size}}lbs
-							</div>
-							<div class="col-md-2" >
-								<button class="btn-sm btn btn-success btn-block btn-hitlift" ng-show="currentUser.$id != bid.userid" ng-click="showHitBid(bid.$id)">hit bid</button>
-								<p style="color:red" ng-show="currentUser.$id == bid.userid">MINE</p> 
-							</div>
-						
-						</div> 
-					</div>
+					<button class="btn btn-block btn-success smallbutton" ng-click="addListing()">
+									Add a listing
+					</button>
 				</div>
 				<div class="col-sm-6">
-					<div class="listingbox">
-						<p style="font-size:24px">Offers</p>
-						<div class="row">
-							
-							<div class="col-xs-4 marketitem">
-								<h5>Description</h5>
-							</div>	
-							<div class="col-xs-3 marketitem">
-								<h5>Price</h5>
-							</div>	
-							<div class="col-xs-3 marketitem">
-								<h5>Qty</h5>
-							</div>	
-							<div class="col-md-2"> 
-							</div>
-						</div> 
-						<div class="row itembox" ng-repeat="offer in offers | orderBy: sorterFunc">
-							
-							<div class="col-xs-4 marketitem">
-							{{offer.description}}
-							</div>	
-							<div class="col-xs-3 marketitem">
-								${{offer.price | number}}/lb
-							</div>	
-							<div class="col-xs-3 marketitem">
-								{{offer.size}}lbs
-							</div>	
-							<div class="col-md-2">
-								<button class="btn-sm btn-danger btn-block btn btn-hitlift" ng-show="currentUser.$id != offer.userid" ng-click="showLiftOffer(offer.$id)">lift offer</button>
-								<p style="color:red" ng-show="currentUser.$id == offer.userid">MINE</p>
-							</div>
-						
-						</div> 
-					</div>
+					<a href="#/" class="smallbutton"><button class="btn btn-block btn-warning smallbutton">
+									Markets List
+					</button></a>
 				</div>
-		
+			</div>
 		</div>
-
-
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-sm-6">
+					<a href="#/user" class="smallbutton"><button class="btn btn-block btn-info smallbutton">
+								Listings/Messages
+					</button></a>
+				</div>
+				<div class="col-sm-6">
+					<button class="btn btn-danger btn-block smallbutton" ng-click="logout()">Logout</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="listingbox">
+				<p style="font-size:24px">Bids</p>
+				<div class="row">
+					<div class="col-xs-4 marketitem">
+						<h5>Description</h5>
+					</div>	
+					<div class="col-xs-3 marketitem">
+						<h5>Price</h5>
+					</div>	
+					<div class="col-xs-3 marketitem">
+						<h5>Qty</h5>
+					</div>	
+					<div class="col-md-2">
+					</div>
+				</div> 
+				<div class="row itembox" ng-repeat="bid in bids | orderBy: sorterFunc: true">		
+					<div class="col-xs-4 marketitem">
+						{{bid.description}}
+					</div>	
+					<div class="col-xs-3 marketitem">
+						${{bid.price}}/lb
+					</div>	
+					<div class="col-xs-3 marketitem">
+						{{bid.size}}lbs
+					</div>
+					<div class="col-md-2" >
+						<button class="btn-sm btn btn-success btn-block btn-hitlift" ng-show="currentUser.$id != bid.userid" ng-click="showHitBid(bid.$id)">hit bid</button>
+						<p style="color:red" ng-show="currentUser.$id == bid.userid">MINE</p> 
+					</div>
+				</div> 
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="listingbox">
+				<p style="font-size:24px">Offers</p>
+				<div class="row">
+					
+					<div class="col-xs-4 marketitem">
+						<h5>Description</h5>
+					</div>	
+					<div class="col-xs-3 marketitem">
+						<h5>Price</h5>
+					</div>	
+					<div class="col-xs-3 marketitem">
+						<h5>Qty</h5>
+					</div>	
+					<div class="col-md-2"> 
+					</div>
+				</div> 
+				<div class="row itembox" ng-repeat="offer in offers | orderBy: sorterFunc">					
+					<div class="col-xs-4 marketitem">
+					{{offer.description}}
+					</div>	
+					<div class="col-xs-3 marketitem">
+						${{offer.price | number}}/lb
+					</div>	
+					<div class="col-xs-3 marketitem">
+						{{offer.size}}lbs
+					</div>	
+					<div class="col-md-2">
+						<button class="btn-sm btn-danger btn-block btn btn-hitlift" ng-show="currentUser.$id != offer.userid" ng-click="showLiftOffer(offer.$id)">lift offer</button>
+						<p style="color:red" ng-show="currentUser.$id == offer.userid">MINE</p>
+					</div>
+				</div> 
+			</div>
+		</div>		
+	</div>
 	<div id="addListingModal" class="modal fade" tabindex="-1" role="dialog">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">

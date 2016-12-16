@@ -4,7 +4,8 @@
 }
 
 .marketitem {
-	overflow:hidden
+	overflow:hidden;
+	float:left;
 }
 
 .incoming {
@@ -16,29 +17,24 @@
 }
 
 .listingbox {
-
     background: lightgrey;
     border-radius: 1rem;
     padding: 1.2rem;
     margin-bottom: 0.75rem;
-    
     border: 1px solid black;
-
 }
 
 .itembox {
-
     background: lightgrey;
     border-radius: 1rem;
     padding: 5px 5px 5px 0px;
     margin: 5px 5px 5px 0px;
-    
     border: 0.2px solid black;
-
 }
 
 .smallbutton {
 	margin-bottom: 0.5rem;
+	text-decoration:none !important;
 }
 
 .btn-hitlift {

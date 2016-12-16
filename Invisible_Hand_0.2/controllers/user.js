@@ -30,6 +30,10 @@ angular.module('livecode').controller('UserController', function($scope, $routeP
 			profile.reviews.push($scope.myReview);
 			Auth.saveProfile(profile).then(function(){
 				$("#writeReviewModal").modal('hide');
+				$('#myModal').on('hidden.bs.modal', function () {
+    		
+
+});
 			});
 		})
 	}
